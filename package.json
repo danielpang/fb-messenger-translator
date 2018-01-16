@@ -1,0 +1,19 @@
+{
+  "name": "messenger-translater-bot",
+  "version": "0.0.1",
+  "description": "A Facebook Messenger Bot that translate messages",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Facebook",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "request": "^2.72.0"
+  },
+  "engines": {
+    "node": "~4.1.2"
+  }
+}

@@ -44,7 +44,7 @@ app.post('/webhook', (req, res) => {
 	});
 
 	// Return a '200 OK' response to all events
-	res.status(200).send('EVENT_RECEIVED');
+	res.sendStatus(200);
 
   } else {
 	// Return a '404 Not Found' if event is not from a page subscription
@@ -116,7 +116,7 @@ function callSendAPI(sender_psid, response) {
 	// Send the HTTP request to the Messenger Platform
   request({
     "uri": "https://graph.facebook.com/v2.6/me/messages",
-    "qs": { "access_token": PAGE_ACCESS_TOKEN },
+    "qs": { access_token: process.env.PAGE_ACCESS_TOKEN },
     "method": "POST",
     "json": request_body
   }, (err, res, body) => {

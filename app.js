@@ -163,6 +163,7 @@ function handlePostback(sender_psid, received_postback) {
 function callSendAPI(sender_psid, response) {
   // Construct the message body
   let request_body = {
+	"messaging_type": "RESPONSE",
     "recipient": {
       "id": sender_psid
     },
@@ -171,8 +172,7 @@ function callSendAPI(sender_psid, response) {
 
   // Send the HTTP request to the Messenger Platform
   request({
-    "uri": "https://graph.facebook.com/v2.6/me/messages",
-    "qs": { "access_token": PAGE_ACCESS_TOKEN },
+    "uri": "https://graph.facebook.com/v2.6/me/messages?access_token=" + PAGE_ACCESS_TOKEN,
     "method": "POST",
     "json": request_body
   }, (err, res, body) => {

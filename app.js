@@ -106,7 +106,7 @@ function handleMessage(sender_psid, received_message) {
   let response;
   let response_msg;
   // Checks if the message contains text and is valid
-  if (received_message.text && validMessage(recevied_message.text)) {
+  if (received_message.text && validMessage(received_message.text)) {
 	response_msg = `Hi!`;
   } else {
 	  response_msg = `Sorry, didn't quite get that`;

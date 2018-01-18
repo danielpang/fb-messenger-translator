@@ -13,7 +13,7 @@ const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const
   request = require('request'),
   express = require('express'),
-  const Translate = require('@google-cloud/translate'),
+  Translate = require('@google-cloud/translate'),
   body_parser = require('body-parser'),
   app = express().use(body_parser.json()); // creates express http server
 

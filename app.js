@@ -104,16 +104,17 @@ function validMessage(message){
 
 function handleMessage(sender_psid, received_message) {
   let response;
-
+  let response_msg;
   // Checks if the message contains text and is valid
   if (received_message.text && validMessage(recevied_message.text)) {
-    response = {
-      "text": `HI!`
-    }
+	response_msg = `Hi!`;
   } else {
-
+	  response_msg = `Sorry, didn't quite get that`;
   }
 
+  response = {
+	  "text": response_msg
+  }
   // Send the response message
   callSendAPI(sender_psid, response);
 }

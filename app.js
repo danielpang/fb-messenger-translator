@@ -1,23 +1,10 @@
 
 /**
- * Copyright 2017-present, Facebook, Inc. All rights reserved.
+ * A Translator BOT for Facebook messenger
+ * Created by Daniel Pang, 2018
+ * http://www.danielpang.me
  *
- * This source code is licensed under the license found in the
- * LICENSE file in the root directory of this source tree.
- *
- * Messenger Platform Quick Start Tutorial
- *
- * This is the completed code for the Messenger Platform quick start tutorial
- *
- * https://developers.facebook.com/docs/messenger-platform/getting-started/quick-start/
- *
- * To run this code, you must do the following:
- *
- * 1. Deploy this code to a server running Node.js
- * 2. Run `npm install`
- * 3. Update the VERIFY_TOKEN
- * 4. Add your PAGE_ACCESS_TOKEN to your environment vars
- *
+ * Starter code provided by Facebook
  */
 
 'use strict';
@@ -26,6 +13,7 @@ const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const
   request = require('request'),
   express = require('express'),
+  const Translate = require('@google-cloud/translate'),
   body_parser = require('body-parser'),
   app = express().use(body_parser.json()); // creates express http server
 

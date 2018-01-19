@@ -89,7 +89,7 @@ app.get('/webhook', (req, res) => {
 });
 
 function validMessage(message){
-	var ind = message.indexof(':');
+	var ind = message.indexOf(':');
 	if (ind <= 0){
 		return false;
 	} else {

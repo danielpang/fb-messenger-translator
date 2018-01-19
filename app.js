@@ -177,7 +177,7 @@ function translate_message(target_lang, message){
   }, (err, results, body) => {
       if (!err) {
         console.log('translation successful!');
-		console.log(results.translations.translatedText);
+		console.log(results.translations[0].translatedText);
       } else {
         console.error("Unable to translate, error message:" + err);
       }

@@ -93,8 +93,8 @@ function validMessage(message){
 	if (ind <= 0){
 		return false;
 	} else {
-		var target_lang = message.substring(0, ind + 1).toLowerCase();
-		if (target_lang == 'french' || target_lang == 'german'){
+		var target_lang = message.substring(0, ind + 1);
+		if (target_lang.toLowerCase() == 'french' || target_lang.toLowerCase() == 'german'){
 			return true;
 		} else {
 			return false;

@@ -17,6 +17,7 @@ const
   body_parser = require('body-parser'),
   app = express().use(body_parser.json()); // creates express http server
 
+const g_translate = new Translate();
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
@@ -109,7 +110,7 @@ function handleMessage(sender_psid, received_message) {
   if (received_message.text && validMessage(received_message.text)){
 	response_msg = `Hi!`;
   } else {
-	response_msg = `Sorry, didn't quite understand. To translate a message use target_language:message`;
+	response_msg = `Sorry, didn't quite understand. To translate a message use target_language:message, ex: french:hi`;
   }
 
   response = {

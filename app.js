@@ -174,18 +174,11 @@ function translate_message(target_lang, message){
       "uri": "https://translation.googleapis.com/language/translate/v2?key=" + GOOGLE_API_KEY,
       "method": "POST",
       "json": request_body
-  }, (results) => {
-	let translations = results[0];
-    translations = Array.isArray(translations)
-      ? translations
-      : [translations];
-
-    console.log('Translations:');
-    translations.forEach((translation, i) => {
-      console.log(`${text[i]} => (${target}) ${translation}`);
+  }, (err, results, body) => {
+      if (!err) {
+        console.log(results.translations)
+      } else {
+        console.error("Unable to translate, error message:" + err);
+      }
     });
-  })
-  .catch(err => {
-    console.error('ERROR:', err);
-  });
 }

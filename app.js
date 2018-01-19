@@ -93,7 +93,7 @@ function validMessage(message){
 	if (ind <= 0){
 		return false;
 	} else {
-		var target_lang = message.substring(0, ind + 1);
+		var target_lang = message.substring(0, ind);
 		if (target_lang.toLowerCase() == 'french' || target_lang.toLowerCase() == 'german'){
 			return true;
 		} else {

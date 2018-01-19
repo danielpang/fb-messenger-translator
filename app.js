@@ -9,15 +9,14 @@
 
 'use strict';
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
 // Imports dependencies and set up http server
 const
   request = require('request'),
   express = require('express'),
-  Translate = require('@google-cloud/translate'),
   body_parser = require('body-parser'),
   app = express().use(body_parser.json()); // creates express http server
 
-const g_translate = new Translate();
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
@@ -95,7 +94,10 @@ function validMessage(message){
 		return false;
 	} else {
 		var target_lang = message.substring(0, ind);
-		if (target_lang.toLowerCase() == 'french' || target_lang.toLowerCase() == 'german'){
+		var supported_langs = new Object();
+		supported_langs['french'] = 'fr';
+		supported_langs['german'] = 'gr';
+		if (supported_langs.hasOwnProperty(target_lang.toLowerCase())){
 			return true;
 		} else {
 			return false;
@@ -109,6 +111,7 @@ function handleMessage(sender_psid, received_message) {
   // Checks if the message contains text and is valid
   if (received_message.text && validMessage(received_message.text)){
 	response_msg = `Hi!`;
+	translate_message(received_message.text);
   } else {
 	response_msg = `Sorry, didn't quite understand. To translate a message use target_language:message, ex: french:hi`;
   }
@@ -158,4 +161,25 @@ function callSendAPI(sender_psid, response) {
       console.error("Unable to send message:" + err);
     }
   });
+}
+
+function translate_message(target_lang, message){
+	let translated_message;
+	let request_body = {
+		'q': message,
+		'target': target_lang
+	}
+
+	request({
+      "uri": "https://translation.googleapis.com/language/translate/v2?key=" + GOOGLE_API_KEY,
+      "method": "POST",
+      "json": request_body
+  }, (err, results, body) => {
+      if (!err) {
+        console.log('translation successful!');
+		console.log(results.translations.translatedText);
+      } else {
+        console.error("Unable to translate, error message:" + err);
+      }
+    });
 }

@@ -116,7 +116,7 @@ function validMessage(message){
 }
 
 function handleMessage(sender_psid, received_message) {
-  let response_msg;
+	let response;
   // Checks if the message contains text and is valid
   if (received_message.text && validMessage(received_message.text)){
 	console.log("Valid message")
@@ -125,9 +125,11 @@ function handleMessage(sender_psid, received_message) {
 	console.log(params['text'])
 	translate_message(sender_psid, params);
   } else {
-	response_msg = `Sorry, didn't quite understand. To translate a message use target_language:message, ex: french:hi`;
+	response = {
+		"text" = `Sorry, didn't quite understand. To translate a message use target_language:message, ex: french:hi`
+	}
 	// Send the response message
-    callSendAPI(sender_psid, response = { "text": response_msg});
+    callSendAPI(sender_psid, response);
   }
 }
 

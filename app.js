@@ -121,8 +121,8 @@ function handleMessage(sender_psid, received_message) {
   if (received_message.text && validMessage(received_message.text)){
 	console.log("Valid message")
 	let params = parse_msg(received_message.text);
-	console.log(params.target)
-	console.log(params.text)
+	console.log(params['target'])
+	console.log(params['text'])
 	response_msg = translate_message(params);
   } else {
 	response_msg = `Sorry, didn't quite understand. To translate a message use target_language:message, ex: french:hi`;
@@ -178,8 +178,8 @@ function callSendAPI(sender_psid, response) {
 function translate_message(params){
 	let translated_message;
 	let request_body = {
-		'q': params.text,
-		'target': params.target
+		'q': params['text'],
+		'target': params['target']
 	}
 
 	const options = {

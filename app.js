@@ -177,7 +177,6 @@ function callSendAPI(sender_psid, response) {
 }
 
 function translate_message(params){
-	var translated_message = "hi";
 	let request_body = {
 		'q': params['text'],
 		'target': params['target']
@@ -193,12 +192,11 @@ function translate_message(params){
 		.then(function(response){
 			for (var i in response.data.translations){
 				console.log(response.data.translations[i].translatedText);
-				translated_message = response.data.translations[i].translatedText;
+				return response.data.translations[i].translatedText;
 			}
       	})
 		.catch(function (err){
 			console.error("Unable to translate, error message: " + err);
 		})
-
-	return translated_message;
+	return "Unable to translate, please try again"; 
 }

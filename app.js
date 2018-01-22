@@ -126,7 +126,7 @@ function handleMessage(sender_psid, received_message) {
 	translate_message(sender_psid, params);
   } else {
 	response = {
-		"text" = `Sorry, didn't quite understand. To translate a message use target_language:message, ex: french:hi`
+		"text": `Sorry, didn't quite understand. To translate a message use target_language:message, ex: french:hi`
 	}
 	// Send the response message
     callSendAPI(sender_psid, response);

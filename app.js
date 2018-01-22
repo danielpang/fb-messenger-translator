@@ -191,7 +191,7 @@ function translate_message(params){
 	}
 	request(options)
 		.then(function(response){
-			for (i in response.data.translations){
+			for (var i in response.data.translations){
 				console.log(response.data.translations[i]);
 			}
       	})

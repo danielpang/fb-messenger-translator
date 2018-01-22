@@ -12,7 +12,7 @@ const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
 // Imports dependencies and set up http server
 const
-  request = require('request'),
+  request = require('request-promise'),
   express = require('express'),
   body_parser = require('body-parser'),
   app = express().use(body_parser.json()); // creates express http server
@@ -110,7 +110,8 @@ function handleMessage(sender_psid, received_message) {
   let response_msg;
   // Checks if the message contains text and is valid
   if (received_message.text && validMessage(received_message.text)){
-	response_msg = translate_message(received_message.text);
+	tar = message.substring(0, message.indexOf(':'));
+	response_msg = translate_message(tar, received_message.text);
   } else {
 	response_msg = `Sorry, didn't quite understand. To translate a message use target_language:message, ex: french:hi`;
   }

@@ -116,7 +116,6 @@ function validMessage(message){
 }
 
 function handleMessage(sender_psid, received_message) {
-  let response;
   let response_msg;
   // Checks if the message contains text and is valid
   if (received_message.text && validMessage(received_message.text)){
@@ -124,16 +123,12 @@ function handleMessage(sender_psid, received_message) {
 	let params = parse_msg(received_message.text);
 	console.log(params['target'])
 	console.log(params['text'])
-	response_msg = translate_message(params);
+	translate_message(sender_psid, params);
   } else {
 	response_msg = `Sorry, didn't quite understand. To translate a message use target_language:message, ex: french:hi`;
+	// Send the response message
+    callSendAPI(sender_psid, response = { "text": response_msg});
   }
-
-  response = {
-	  "text": response_msg
-  }
-  // Send the response message
-  callSendAPI(sender_psid, response);
 }
 
 function handlePostback(sender_psid, received_postback) {
@@ -176,9 +171,8 @@ function callSendAPI(sender_psid, response) {
   });
 }
 
-function translate_message(params){
-	let translated_message = new Object();
-	translated_message['text'] = "Unable to translate, please try again";
+function translate_message(sender_psid, params){
+	let response;
 	let request_body = {
 		'q': params['text'],
 		'target': params['target']
@@ -194,11 +188,17 @@ function translate_message(params){
 		.then(function(response){
 			for (var i in response.data.translations){
 				console.log(response.data.translations[i].translatedText);
-				translated_message['text'] = response.data.translations[i].translatedText;
+				response = {
+					"text": response.data.translations[i].translatedText
+				}
+				callSendAPI(sender_psid, response);
 			}
       	})
 		.catch(function (err){
 			console.error("Unable to translate, error message: " + err);
+			response = {
+				"text": "Unable to translate, please try again!"
+			}
+			callSendAPI(sender_psid, response);
 		})
-	return translated_message['text'];
 }

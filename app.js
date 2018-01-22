@@ -93,7 +93,7 @@ function parse_msg(message){
 	var target_lang = message.substring(0, ind);
 	var supported_langs = new Object();
 	supported_langs['french'] = 'fr';
-	supported_langs['german'] = 'gr';
+	supported_langs['german'] = 'de';
 	if (supported_langs.hasOwnProperty(target_lang.toLowerCase())){
 		var params = new Object();
 		params['target'] = supported_langs[target_lang.toLowerCase()];

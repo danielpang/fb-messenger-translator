@@ -88,14 +88,16 @@ app.get('/webhook', (req, res) => {
   }
 });
 
-function determine_lang(message){
+function parse_msg(message){
 	var ind = message.indexOf(':');
 	var target_lang = message.substring(0, ind);
 	var supported_langs = new Object();
 	supported_langs['french'] = 'fr';
 	supported_langs['german'] = 'gr';
 	if (supported_langs.hasOwnProperty(target_lang.toLowerCase())){
-		return supported_langs[target_lang.toLowerCase()];
+		var params = new Object();
+		params['target'] = supported_langs[target_lang.toLowerCase()];
+		params['text'] = message.substr(ind + 1);
 	} else {
 		return "";
 	}
@@ -118,8 +120,10 @@ function handleMessage(sender_psid, received_message) {
   // Checks if the message contains text and is valid
   if (received_message.text && validMessage(received_message.text)){
 	console.log("Valid message")
-	let tar = determine_lang(received_message.text);
-	response_msg = translate_message(tar, received_message.text);
+	let params = parse_msg(received_message.text);
+	console.log(params.target)
+	console.log(params.text)
+	response_msg = translate_message(params);
   } else {
 	response_msg = `Sorry, didn't quite understand. To translate a message use target_language:message, ex: french:hi`;
   }
@@ -171,11 +175,11 @@ function callSendAPI(sender_psid, response) {
   });
 }
 
-function translate_message(target_lang, message){
+function translate_message(params){
 	let translated_message;
 	let request_body = {
-		'q': message,
-		'target': target_lang
+		'q': params.text,
+		'target': params.target
 	}
 
 	const options = {

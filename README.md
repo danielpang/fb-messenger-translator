@@ -10,5 +10,5 @@ ex: "french:hello!", "german:goodbye!"
 
 Current Supported languages:
 
-French
-German
+* French
+* German

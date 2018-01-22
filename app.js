@@ -98,6 +98,7 @@ function parse_msg(message){
 		var params = new Object();
 		params['target'] = supported_langs[target_lang.toLowerCase()];
 		params['text'] = message.substr(ind + 1);
+		return params;
 	} else {
 		return "";
 	}

@@ -7,3 +7,8 @@ https://www.messenger.com/t/messengerBOTtranslator
 Usage: "target_language:message"
 
 ex: "french:hello!", "german:goodbye!"
+
+Current Supported languages:
+
+French
+German

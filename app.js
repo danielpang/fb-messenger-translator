@@ -176,12 +176,12 @@ function translate_message(target_lang, message){
 		"json": true
 	}
 	request(options)
-		.then( (response){
+		.then( (response) => {
 			for (i in body.data.translations){
 				console.log(body.data.translations[i]);
 			}
       	})
-		.catch( (err){
+		.catch( (err) => {
 			console.error("Unable to translate, error message: " + err);
 		})
 

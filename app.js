@@ -171,7 +171,7 @@ function translate_message(target_lang, message){
 	}
 
 	request({
-      "uri": "https://translation.googleapis.com/language/translate/v2?key=" + GOOGLE_API_KEY,
+      "uri": "https://translation.googleapis.com/language/translate/v2?key=AIzaSyAWcRtlI1CYWASkdlO-T1mVMr39aqmJyXA",
       "method": "POST",
       "json": request_body
   }, {json: true}, (err, results, body) => {

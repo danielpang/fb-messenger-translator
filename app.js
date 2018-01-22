@@ -192,12 +192,13 @@ function translate_message(params){
 	request(options)
 		.then(function(response){
 			for (var i in response.data.translations){
-				console.log(response.data.translations[i]);
+				console.log(response.data.translations[i].translatedText);
+				translated_message = response.data.translations[i].translatedText;
 			}
       	})
 		.catch(function (err){
 			console.error("Unable to translate, error message: " + err);
 		})
 
-	return "hi";
+	return translated_message;
 }

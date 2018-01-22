@@ -175,7 +175,7 @@ function translate_message(target_lang, message){
       "json": request_body
   }, (err, results, body) => {
       if (!err) {
-        console.log(body.translations);
+        console.log("Translated text: " + body.translations[0].translatedText);
 		return body.translations;
       } else {
         console.error("Unable to translate, error message: " + err);

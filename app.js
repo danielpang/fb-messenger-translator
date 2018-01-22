@@ -110,8 +110,7 @@ function handleMessage(sender_psid, received_message) {
   let response_msg;
   // Checks if the message contains text and is valid
   if (received_message.text && validMessage(received_message.text)){
-	response_msg = `Hi!`;
-	translate_message(received_message.text);
+	response_msg = translate_message(received_message.text);
   } else {
 	response_msg = `Sorry, didn't quite understand. To translate a message use target_language:message, ex: french:hi`;
   }
@@ -176,7 +175,8 @@ function translate_message(target_lang, message){
       "json": request_body
   }, (err, results, body) => {
       if (!err) {
-        console.log(results.translations);
+        console.log(body.translations);
+		return body.translations;
       } else {
         console.error("Unable to translate, error message: " + err);
       }

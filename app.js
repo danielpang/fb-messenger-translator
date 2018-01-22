@@ -175,7 +175,7 @@ function translate_message(target_lang, message){
 		"body": request_body,
 		"json": true
 	}
-	request(options).
+	request(options)
 		.then(function (response){
 			for (i in body.data.translations){
 				console.log(body.data.translations[i]);

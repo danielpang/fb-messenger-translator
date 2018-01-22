@@ -88,12 +88,16 @@ app.get('/webhook', (req, res) => {
   }
 });
 
+// Parses valid messages
+// Returns an object with target and text fields
 function parse_msg(message){
+	// Separate message into target and message
 	var ind = message.indexOf(':');
 	var target_lang = message.substring(0, ind);
 	var supported_langs = new Object();
 	supported_langs['french'] = 'fr';
 	supported_langs['german'] = 'de';
+	// Check if given language is 1. valid and 2. supported
 	if (supported_langs.hasOwnProperty(target_lang.toLowerCase())){
 		var params = new Object();
 		params['target'] = supported_langs[target_lang.toLowerCase()];
@@ -104,6 +108,8 @@ function parse_msg(message){
 	}
 }
 
+// Determines if message sent from user is valid
+// Called before message is parsed (by parse_msg(message))
 function validMessage(message){
 	var ind = message.indexOf(':');
 	if (ind <= 0){
@@ -115,6 +121,9 @@ function validMessage(message){
 	}
 }
 
+// Handles intercepting messages from users
+// Processes and translates valid messages
+// Sends an error message if message from user was invalid
 function handleMessage(sender_psid, received_message) {
 	let response;
   // Checks if the message contains text and is valid
@@ -124,6 +133,7 @@ function handleMessage(sender_psid, received_message) {
 	console.log(params['target'])
 	console.log(params['text'])
 	translate_message(sender_psid, params);
+  // Sends error response if message sent by user was invalid
   } else {
 	response = {
 		"text": `Sorry, didn't quite understand. To translate a message use target_language:message, ex: french:hi`
@@ -149,6 +159,7 @@ function handlePostback(sender_psid, received_postback) {
   callSendAPI(sender_psid, response);
 }
 
+// Sends response back to users
 function callSendAPI(sender_psid, response) {
   // Construct the message body
   let request_body = {
@@ -173,6 +184,8 @@ function callSendAPI(sender_psid, response) {
   });
 }
 
+// Translates messages and sends it back to user (via callSendAPI)
+// Uses Google Translate API to translate messages 
 function translate_message(sender_psid, params){
 	let response;
 	let request_body = {

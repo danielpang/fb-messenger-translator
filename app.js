@@ -107,7 +107,7 @@ function validMessage(message){
 	var ind = message.indexOf(':');
 	if (ind <= 0){
 		return false;
-	} else if (determine_lang(message) == ""){
+	} else if (parse_msg(message) == ""){
 		return false;
 	} else {
 		return true;

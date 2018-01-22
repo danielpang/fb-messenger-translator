@@ -177,7 +177,7 @@ function callSendAPI(sender_psid, response) {
 }
 
 function translate_message(params){
-	var translated_message;
+	var translated_message = "hi";
 	let request_body = {
 		'q': params['text'],
 		'target': params['target']

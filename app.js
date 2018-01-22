@@ -169,19 +169,21 @@ function translate_message(target_lang, message){
 		'target': target_lang
 	}
 
-	request({
-      "uri": "https://translation.googleapis.com/language/translate/v2?key=" + GOOGLE_API_KEY,
-      "method": "POST",
-      "json": request_body
-  }, (err, results, body) => {
-      if (!err) {
-		  for (i in body.translations){
-			  console.log(body.data.translations[i]);
-		  }
-      } else {
-        console.error("Unable to translate, error message: " + err);
-      }
-    });
+	const options = {
+		"uri": "https://translation.googleapis.com/language/translate/v2?key=" + GOOGLE_API_KEY,
+		"method": "POST",
+		"body": request_body,
+		"json": true
+	}
+	request(options).
+		.then(function (response){
+			for (i in body.data.translations){
+				console.log(body.data.translations[i]);
+			}
+      	})
+		.catch(function (err){
+			console.error("Unable to translate, error message: " + err);
+		})
 
 	return "hi";
 }

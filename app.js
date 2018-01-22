@@ -176,10 +176,12 @@ function translate_message(target_lang, message){
   }, (err, results, body) => {
       if (!err) {
 		  for (i in body.translations){
-			  console.log(body.translations[i]);
+			  console.log(body.data.translations[i]);
 		  }
       } else {
         console.error("Unable to translate, error message: " + err);
       }
     });
+
+	return "hi";
 }

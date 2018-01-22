@@ -88,20 +88,27 @@ app.get('/webhook', (req, res) => {
   }
 });
 
+function determine_lang(message){
+	var ind = message.indexOf(':');
+	var target_lang = message.substring(0, ind);
+	var supported_langs = new Object();
+	supported_langs['french'] = 'fr';
+	supported_langs['german'] = 'gr';
+	if (supported_langs.hasOwnProperty(target_lang.toLowerCase())){
+		return supported_langs[target_lang.toLowerCase()];
+	} else {
+		return "";
+	}
+}
+
 function validMessage(message){
 	var ind = message.indexOf(':');
 	if (ind <= 0){
 		return false;
+	} else if (determine_lang(message) == ""){
+		return false;
 	} else {
-		var target_lang = message.substring(0, ind);
-		var supported_langs = new Object();
-		supported_langs['french'] = 'fr';
-		supported_langs['german'] = 'gr';
-		if (supported_langs.hasOwnProperty(target_lang.toLowerCase())){
-			return true;
-		} else {
-			return false;
-		}
+		return true;
 	}
 }
 
@@ -111,7 +118,7 @@ function handleMessage(sender_psid, received_message) {
   // Checks if the message contains text and is valid
   if (received_message.text && validMessage(received_message.text)){
 	console.log("Valid message")
-	let tar = received_message.text.substring(0, received_message.text.indexOf(':'));
+	let tar = determine_lang(received_message.text);
 	response_msg = translate_message(tar, received_message.text);
   } else {
 	response_msg = `Sorry, didn't quite understand. To translate a message use target_language:message, ex: french:hi`;
@@ -178,12 +185,12 @@ function translate_message(target_lang, message){
 		"json": true
 	}
 	request(options)
-		.then( (response) => {
-			for (i in body.data.translations){
-				console.log(body.data.translations[i]);
+		.then(function(response){
+			for (i in response.data.translations){
+				console.log(response.data.translations[i]);
 			}
       	})
-		.catch( (err) => {
+		.catch(function (err){
 			console.error("Unable to translate, error message: " + err);
 		})
 

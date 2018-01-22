@@ -175,15 +175,9 @@ function translate_message(target_lang, message){
       "json": request_body
   }, (err, results, body) => {
       if (!err) {
-		let translations = results[0];
-		translations = Array.isArray(translations)
-			? translations
-			: [translations];
-
-		console.log('Translations:');
-		translations.forEach((translation, i) => {
-			console.log(`${translation}`);
-		})
+		  for (i in body.translations){
+			  console.log(body.translations[i]);
+		  }
       } else {
         console.error("Unable to translate, error message: " + err);
       }

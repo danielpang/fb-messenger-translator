@@ -1,6 +1,6 @@
 # Facebook Messenger Translator BOT
 
-Send messages to me to have them translated! (currently in App Review Process, contact me if you would like to be a tester)
+Send messages to me to have them translated! (currently in Testing Process, contact me if you would like to be a tester)
 
 https://www.messenger.com/t/messengerBOTtranslator
 

@@ -171,14 +171,14 @@ function translate_message(target_lang, message){
 	}
 
 	request({
-      "uri": "https://translation.googleapis.com/language/translate/v2?key=AIzaSyAWcRtlI1CYWASkdlO-T1mVMr39aqmJyXA",
+      "uri": "https://translation.googleapis.com/language/translate/v2?key=" + GOOGLE_API_KEY,
       "method": "POST",
       "json": request_body
-  }, {json: true}, (err, results, body) => {
+  } (err, results, body) => {
       if (!err) {
         console.log(data.translations);
       } else {
-        console.error("Unable to translate, error message:" + err);
+        console.error("Unable to translate, error message: " + err);
       }
     });
 }

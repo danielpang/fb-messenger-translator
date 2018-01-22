@@ -174,9 +174,9 @@ function translate_message(target_lang, message){
       "uri": "https://translation.googleapis.com/language/translate/v2?key=" + GOOGLE_API_KEY,
       "method": "POST",
       "json": request_body
-  } (err, results, body) => {
+  }, (err, results, body) => {
       if (!err) {
-        console.log(data.translations);
+        console.log(results.translations);
       } else {
         console.error("Unable to translate, error message: " + err);
       }

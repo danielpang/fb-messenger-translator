@@ -169,7 +169,7 @@ function callSendAPI(sender_psid, response) {
     "json": request_body
   }, (err, res, body) => {
     if (!err) {
-      console.log('message: ' + response['text'] +  'sent!!')
+      console.log('message: ' + response['text'] +  ' sent!!')
     } else {
       console.error("Unable to send message:" + err);
     }
@@ -177,7 +177,7 @@ function callSendAPI(sender_psid, response) {
 }
 
 function translate_message(params){
-	let translated_message;
+	var translated_message;
 	let request_body = {
 		'q': params['text'],
 		'target': params['target']

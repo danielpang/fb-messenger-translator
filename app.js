@@ -169,7 +169,7 @@ function callSendAPI(sender_psid, response) {
     "json": request_body
   }, (err, res, body) => {
     if (!err) {
-      console.log('message: ' + response['text'] +  ' sent!!')
+      console.log('message: "' + response['text'] +  '" sent!!')
     } else {
       console.error("Unable to send message:" + err);
     }
@@ -177,6 +177,8 @@ function callSendAPI(sender_psid, response) {
 }
 
 function translate_message(params){
+	let translated_message = new Object();
+	translated_message['text'] = "Unable to translate, please try again";
 	let request_body = {
 		'q': params['text'],
 		'target': params['target']
@@ -192,11 +194,11 @@ function translate_message(params){
 		.then(function(response){
 			for (var i in response.data.translations){
 				console.log(response.data.translations[i].translatedText);
-				return response.data.translations[i].translatedText;
+				translated_message['text'] = response.data.translations[i].translatedText;
 			}
       	})
 		.catch(function (err){
 			console.error("Unable to translate, error message: " + err);
 		})
-	return "Unable to translate, please try again"; 
+	return translated_message['text'];
 }

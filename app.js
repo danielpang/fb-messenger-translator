@@ -182,7 +182,7 @@ function translate_message(target_lang, message){
 
 		console.log('Translations:');
 		translations.forEach((translation, i) => {
-			console.log(`${text[i]} => (${target}) ${translation}`);
+			console.log(`${translation}`);
 		})
       } else {
         console.error("Unable to translate, error message: " + err);

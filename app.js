@@ -111,7 +111,7 @@ function handleMessage(sender_psid, received_message) {
   // Checks if the message contains text and is valid
   if (received_message.text && validMessage(received_message.text)){
 	console.log("Valid message")
-	tar = received_message.text.substring(0, received_message.text.indexOf(':'));
+	let tar = received_message.text.substring(0, received_message.text.indexOf(':'));
 	response_msg = translate_message(tar, received_message.text);
   } else {
 	response_msg = `Sorry, didn't quite understand. To translate a message use target_language:message, ex: french:hi`;
